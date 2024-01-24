@@ -8,7 +8,12 @@ import Counter from './components/Counter';
 import FunctionClick from './components/FunctionClick'
 import ClassClick from './components/ClassClick'
 import EventBind from './components/EventBind';
-
+import ParentComponent from './components/ParentComponent';
+import UserGreeting from './components/UserGreeting';
+import NameListRendering from './components/NameListRendering';
+import StyleSheet from './components/StyleSheet';
+import './appStyle.css'
+import style from './appStyle.module.css'
 
 
 function App() {
@@ -16,6 +21,17 @@ function App() {
     <div className="App">
 
       
+
+      {/* <h1 className={`error`}>Error</h1>
+      <h1 className={style.success }>Success</h1> */}
+
+      {/* <StyleSheet className = {true} /> */}
+
+      {/* <NameListRendering/> */}
+
+      {/* <UserGreeting/> */}
+
+      {/* <ParentComponent/> */}
       
       {/* <EventBind/> */}
 
