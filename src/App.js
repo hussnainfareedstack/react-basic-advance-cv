@@ -14,13 +14,13 @@ import NameListRendering from './components/NameListRendering';
 import StyleSheet from './components/StyleSheet';
 import './appStyle.css'
 import style from './appStyle.module.css'
-
+import Form from './components/Form';
 
 function App() {
   return (
     <div className="App">
 
-      
+      <Form/>
 
       {/* <h1 className={`error`}>Error</h1>
       <h1 className={style.success }>Success</h1> */}

@@ -24,7 +24,7 @@ These are ES6 classes which extends React Components and return rendered html. t
 They also maintain it's private State means it can mantain some information which is private to that Component and use that information to describe user interface.
 
 ## Functional Component vs Class Component
-![Screenshot](functional vs class components.png)
+![Screenshot](Images/functional%20vs%20class%20components.png)
 <b>Functional Components<b>
     1. Simple Functions
     2. Use Func Components as much as possible.
@@ -138,7 +138,32 @@ We have 4 ways to style react a react component. We will cover first three now a
 4. CSS in JS Libaries:     Recomended -> (Styled Components) 
     A seperate series will come for this.
 
+# Basics of Form Handling
+In react we handle form data with controlled Component. In the words we use state property to manage data. Refer form.js file for this demonstration.
 
+# Component Lifecycle Methods
+In react a component goes from different life cycles stages. React provides us different methods that we can override at particular stages in the life Cycle. These lifecycle methods available only in Class Components and these methods do not exist on functional component.
+With the new proposal of hooks there is useEffect Hook which partially related Lifecycle Hook.
+We can classify the methods into four phases:
+1. Mounting: 
+Called when an instance of component are created and inserted into the DOM. 
+During this phase we have 4 methods. Which are:
+    contructor, static getDerivedStateFromProps, render and componentDidMount.
+
+
+2. Updating: 
+Called when is being re-rendered as a result of changes to either it's props or states.
+During this phase we have 5 methods. Which are:
+    static getDerivedStateFromProps, shouldComponentUpdate, render, getSnapshotBeforeUpdate and compnentDidUpdate
+
+3. Unmounting: 
+Called when a component is being removed from the DOM. In this phase we have only one method, which is
+    ComponentWillUnmount
+
+4. Error Handling: 
+Called when there is a error during rendering, in a life cycle method, or in the constructor on any child component.
+In this phase we have 2 methods. Which are
+    static getDerivedStateFromError and componentDidCatch
 
 
 
