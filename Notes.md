@@ -26,7 +26,6 @@ They also maintain it's private State means it can mantain some information whic
 ## Functional Component vs Class Component
 ![Screenshot](Images/functional%20vs%20class%20components.png)
 <img src="Images/functional vs class components.png" alt="alt text" width="1000"/>
-
 <b>Functional Components<b>
     1. Simple Functions
     2. Use Func Components as much as possible.
