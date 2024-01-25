@@ -24,8 +24,8 @@ These are ES6 classes which extends React Components and return rendered html. t
 They also maintain it's private State means it can mantain some information which is private to that Component and use that information to describe user interface.
 
 ## Functional Component vs Class Component
-![Screenshot](Images/functional%20vs%20class%20components.png)
-<img src="Images/functional vs class components.png" alt="alt text" width="1000"/>
+![functional vs class components picture](Images/functional%20vs%20class%20components.png)
+<!-- <img src="Images/functional vs class components.png" alt="alt text" width="1000"/> Also this works-->
 
 <b>Functional Components<b>
     1. Simple Functions
@@ -144,29 +144,67 @@ We have 4 ways to style react a react component. We will cover first three now a
 In react we handle form data with controlled Component. In the words we use state property to manage data. Refer form.js file for this demonstration.
 
 # Component Lifecycle Methods
+<a href="https://youtu.be/qnN_FuFNq2g?si=s32__CpV95YxNgRk">Video Explanation</a>
+<img src="Images/22 - Component Lifecycle Methods.png" width="800" height="600"></br>
+<img src="Images/22 - Component Lifecycle Methods Methods.png" width="800" height="600"></br>
+
 In react a component goes from different life cycles stages. React provides us different methods that we can override at particular stages in the life Cycle. These lifecycle methods available only in Class Components and these methods do not exist on functional component.
 With the new proposal of hooks there is useEffect Hook which partially related Lifecycle Hook.
+
 We can classify the methods into four phases:
-1. Mounting: 
+
+## 1. Mounting: 
+<a href="https://www.youtube.com/watch?v=KDXZibVdiEI&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=23">Video Explanation</a>
+
 Called when an instance of component are created and inserted into the DOM. 
 During this phase we have 4 methods. Which are:
-    contructor, static getDerivedStateFromProps, render and componentDidMount.
+    constructor, static getDerivedStateFromProps, render and componentDidMount.
+<b>Explanation</b>: 
 
+<img src="Images/23 - Component Mounting Lifecycle methods - Constructor.png" width="800" height="600"></br>
+<strong>constructor</strong> is called whenever a new component is created. In constructor we can initialize state and bind event handlers.<emp>In constructor do not call any Https request like AJAX</emp>. The constructor is the only place where we can directly initialize state. In this constructor we have to call a special method super(props) which calls basic class constructor and allow us to use props in this constructor.
 
-2. Updating: 
+<img src="Images/23 - Component Mounting Lifecycle methods - getDerivedFromProps.png" width="800" height="600"></br>
+<strong>static getDerivedStateFromProps</strong> is rarely called. It is called when the state of the component depends on the changes in the props. Then we need to set the state in this but as we can see this method is static, this keyword is not passed to this method. So this methods returns an object of the new state. <emp>Do not call any Https request in this method</emp>.
+
+<img src="Images/23 - Component Mounting Lifecycle methods - render.png" width="800" height="600"></br>
+<strong>render()</strong> is a pure function and the only required method in class component. It reads and state and props and return JSX. <emp>In this do not change state or interact with DOM or make https request like AJAX</emp>. If any children method involved in this component lifecycle started exectued for this also.
+
+<img src="Images/23 - Component Mounting Lifecycle methods - ComponentDidMount.png" width="800" height="600"></br>
+<strong>componentDidMount()</strong> Invoked immediately after a component and all of it's child component have been rendered to the DOM. <emp>In this you can interact with DOM and perform any AJAX call to load Data</emp>.
+
+For the demonstration of these see file "LifecycleA.js"
+
+## 2. Updating: 
+<a href="https://www.youtube.com/watch?v=DyPkojd1fas&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=24">Video Explanation</a>
 Called when is being re-rendered as a result of changes to either it's props or states.
 During this phase we have 5 methods. Which are:
     static getDerivedStateFromProps, shouldComponentUpdate, render, getSnapshotBeforeUpdate and compnentDidUpdate
 
-3. Unmounting: 
+<strong>static getDerivedStateFromProps</strong> called everytime when a component is rerendered. It return null or an object of updated state of component. as we discussed already that this method is used when state is depend on the props of component. <emp>Rarely used method in the updating phase</emp>.
+
+<strong>shouldComponentUpdate(nextProps, nextState)</strong> as dictates from it's name that component should re-render or not. By default all class should re-render when Props recieved or their state changes. In this we can compare current Props and state with nextProps and state and let React know that should component update or not.So basically this method is for performance optimization. <emp>Rarely used method as written in official react documentation</emp>.
+
+<strong>render()</render> same as we discussed in Mount Phase.
+
+<strong>getSnapshotBeforeUpdate(prevProps, PrevState)</strong> called right before the changes from Virtual DOM are to be reflected in the DOM. Can be used to capture some information from the DOM, like we can read user scroll position and after update maintain that position by doing some calculations. Will return null or a value which can be used as a third parameter to the next method. <emp>Rarely used method in the updating phase</emp>.
+
+<strong>compnentDidUpdate(prevProps, prevState, snapshot)</strong> called after the render is finished in the re-render cycle. This means yu can be sure that all the components are updated. Guarenteed to be called only once in each re-render cycle. <emp>We can make AJAX calls here but we need to compare first the prevProps and newProps and decide whether to make AJAX call or not. If you are not comparing then you are making unwanted request which is a bad idea.</emp>
+
+** Note: Render and componentDidUpdate are most commenly used in the update lifecycle. **
+
+## 3. Unmounting: 
 Called when a component is being removed from the DOM. In this phase we have only one method, which is
     ComponentWillUnmount
+<strong> componentWillUpdate </strong> invoked immediatley before the component unmounted and destroyed. 
+In this we can perform some cleanup task like cancelling network request, removing event handlers, cancelling any subscriptions and also invalidating timers. <emp> Do not call setState method in this. Because component will never re-rendered after it unmounted</emp>
 
-4. Error Handling: 
+## 4. Error Handling: 
 Called when there is a error during rendering, in a life cycle method, or in the constructor on any child component.
 In this phase we have 2 methods. Which are
     static getDerivedStateFromError and componentDidCatch
-
+These two methods called when there is an error either during re-rendering, in a lifecycle method or in the constructor of any child component.
+**Note: We will discuss in detail these 2 method when we study "Error Boundries in react" **
 
 
 
