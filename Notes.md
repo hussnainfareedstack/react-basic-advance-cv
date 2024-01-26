@@ -145,8 +145,9 @@ In react we handle form data with controlled Component. In the words we use stat
 
 # Component Lifecycle Methods
 <a href="https://youtu.be/qnN_FuFNq2g?si=s32__CpV95YxNgRk">Video Explanation</a>
-<img src="Images/22 - Component Lifecycle Methods.png" width="800" height="600"></br>
-<img src="Images/22 - Component Lifecycle Methods Methods.png" width="800" height="600"></br>
+<img src="Images/22 - Component Lifecycle Methods.png" width="900" height="500"></br>
+<img src="Images/22 - Component Lifecycle Methods Methods.png" width="900" height="500"></br>
+<img src="Images/22-Component Lifecycle Methods.png" width="900" height="500"></br>
 
 In react a component goes from different life cycles stages. React provides us different methods that we can override at particular stages in the life Cycle. These lifecycle methods available only in Class Components and these methods do not exist on functional component.
 With the new proposal of hooks there is useEffect Hook which partially related Lifecycle Hook.
@@ -162,16 +163,16 @@ During this phase we have 4 methods. Which are:
 <b>Explanation</b>: 
 
 <img src="Images/23 - Component Mounting Lifecycle methods - Constructor.png" width="800" height="600"></br>
-<strong>constructor</strong> is called whenever a new component is created. In constructor we can initialize state and bind event handlers.<emp>In constructor do not call any Https request like AJAX</emp>. The constructor is the only place where we can directly initialize state. In this constructor we have to call a special method super(props) which calls basic class constructor and allow us to use props in this constructor.
+<b>1. constructor</b> is called whenever a new component is created. In constructor we can initialize state and bind event handlers.<emp>In constructor do not call any Https request like AJAX</emp>. The constructor is the only place where we can directly initialize state. In this constructor we have to call a special method super(props) which calls basic class constructor and allow us to use props in this constructor.
 
 <img src="Images/23 - Component Mounting Lifecycle methods - getDerivedFromProps.png" width="800" height="600"></br>
-<strong>static getDerivedStateFromProps</strong> is rarely called. It is called when the state of the component depends on the changes in the props. Then we need to set the state in this but as we can see this method is static, this keyword is not passed to this method. So this methods returns an object of the new state. <emp>Do not call any Https request in this method</emp>.
+<b>2. static getDerivedStateFromProps</b> is rarely called. It is called when the state of the component depends on the changes in the props. Then we need to set the state in this but as we can see this method is static, this keyword is not passed to this method. So this methods returns an object of the new state. <emp>Do not call any Https request in this method</emp>.
 
 <img src="Images/23 - Component Mounting Lifecycle methods - render.png" width="800" height="600"></br>
-<strong>render()</strong> is a pure function and the only required method in class component. It reads and state and props and return JSX. <emp>In this do not change state or interact with DOM or make https request like AJAX</emp>. If any children method involved in this component lifecycle started exectued for this also.
+<b>3. render()</b> is a pure function and the only required method in class component. It reads and state and props and return JSX. <emp>In this do not change state or interact with DOM or make https request like AJAX</emp>. If any children method involved in this component lifecycle started exectued for this also.
 
 <img src="Images/23 - Component Mounting Lifecycle methods - ComponentDidMount.png" width="800" height="600"></br>
-<strong>componentDidMount()</strong> Invoked immediately after a component and all of it's child component have been rendered to the DOM. <emp>In this you can interact with DOM and perform any AJAX call to load Data</emp>.
+<strong>4. componentDidMount()</strong> Invoked immediately after a component and all of it's child component have been rendered to the DOM. <emp>In this you can interact with DOM and perform any AJAX call to load Data</emp>.
 
 For the demonstration of these see file "LifecycleA.js"
 
@@ -181,30 +182,140 @@ Called when is being re-rendered as a result of changes to either it's props or 
 During this phase we have 5 methods. Which are:
     static getDerivedStateFromProps, shouldComponentUpdate, render, getSnapshotBeforeUpdate and compnentDidUpdate
 
-<strong>static getDerivedStateFromProps</strong> called everytime when a component is rerendered. It return null or an object of updated state of component. as we discussed already that this method is used when state is depend on the props of component. <emp>Rarely used method in the updating phase</emp>.
+<img src="Images/24 - Update Lifecycle 1-getDerivedStateFromProps.png" width="900" height="500"></br>
+<b>1. static getDerivedStateFromProps</b> called everytime when a component is rerendered. It return null or an object of updated state of component. as we discussed already that this method is used when state is depend on the props of component. <emp>Rarely used method in the updating phase</emp>.
 
-<strong>shouldComponentUpdate(nextProps, nextState)</strong> as dictates from it's name that component should re-render or not. By default all class should re-render when Props recieved or their state changes. In this we can compare current Props and state with nextProps and state and let React know that should component update or not.So basically this method is for performance optimization. <emp>Rarely used method as written in official react documentation</emp>.
+<img src="Images/24 - Update Lifecycle 2-shouldComponentUpdate.png" width="900" height="500"></br>
+<b>2. shouldComponentUpdate(nextProps, nextState)</strong> as dictates from it's name that component should re-render or not. By default all class should re-render when Props recieved or their state changes. In this we can compare current Props and state with nextProps and state and let React know that should component update or not.So basically this method is for performance optimization. <emp>Rarely used method as written in official react documentation</emp>.
 
-<strong>render()</render> same as we discussed in Mount Phase.
+<img src="Images/24 - Update Lifecycle 3-Render.png" width="900" height="500"></br>
+<b>3. render()</b> same as we discussed in Mount Phase.
 
-<strong>getSnapshotBeforeUpdate(prevProps, PrevState)</strong> called right before the changes from Virtual DOM are to be reflected in the DOM. Can be used to capture some information from the DOM, like we can read user scroll position and after update maintain that position by doing some calculations. Will return null or a value which can be used as a third parameter to the next method. <emp>Rarely used method in the updating phase</emp>.
+<img src="Images/24 - Update Lifecycle 4-getSnapShotBeforeUpdate.png" width="900" height="500"></br>
+<b>4. getSnapshotBeforeUpdate(prevProps, PrevState)</b> called right before the changes from Virtual DOM are to be reflected in the DOM. Can be used to capture some information from the DOM, like we can read user scroll position and after update maintain that position by doing some calculations. Will return null or a value which can be used as a third parameter to the next method. <emp>Rarely used method in the updating phase</emp>.
 
-<strong>compnentDidUpdate(prevProps, prevState, snapshot)</strong> called after the render is finished in the re-render cycle. This means yu can be sure that all the components are updated. Guarenteed to be called only once in each re-render cycle. <emp>We can make AJAX calls here but we need to compare first the prevProps and newProps and decide whether to make AJAX call or not. If you are not comparing then you are making unwanted request which is a bad idea.</emp>
+<img src="Images/24 - Update Lifecycle 5-componentDidUpdate.png" width="900" height="500"></br>
+<b>5. compnentDidUpdate(prevProps, prevState, snapshot)</b> called after the render is finished in the re-render cycle. This means yu can be sure that all the components are updated. Guarenteed to be called only once in each re-render cycle. <emp>We can make AJAX calls here but we need to compare first the prevProps and newProps and decide whether to make AJAX call or not. If you are not comparing then you are making unwanted request which is a bad idea.</emp>
 
 ** Note: Render and componentDidUpdate are most commenly used in the update lifecycle. **
+<img src="Images/24 - Update Lifecycle - Lifecycle Execution example.png" width="900" height="500"></br>
 
 ## 3. Unmounting: 
 Called when a component is being removed from the DOM. In this phase we have only one method, which is
     ComponentWillUnmount
-<strong> componentWillUpdate </strong> invoked immediatley before the component unmounted and destroyed. 
+
+<img src="Images/24 - Unmounting Phase Method.png" width="900" height="500"></br>
+<b> componentWillUnmount </b> invoked immediatley before the component unmounted and destroyed. 
 In this we can perform some cleanup task like cancelling network request, removing event handlers, cancelling any subscriptions and also invalidating timers. <emp> Do not call setState method in this. Because component will never re-rendered after it unmounted</emp>
 
 ## 4. Error Handling: 
 Called when there is a error during rendering, in a life cycle method, or in the constructor on any child component.
 In this phase we have 2 methods. Which are
     static getDerivedStateFromError and componentDidCatch
+
+<img src="Images/24 - Error Handling Phase Methods.png" width="900" height="500"></br>
 These two methods called when there is an error either during re-rendering, in a lifecycle method or in the constructor of any child component.
 **Note: We will discuss in detail these 2 method when we study "Error Boundries in react" **
+
+
+# React Advance 
+
+# Fragments
+<a href="https://youtu.be/bHdh1T0-US4?si=9XgVk2WPZrWydPZa" target="_blank">Video Explanation</a></br>
+Fragment let you group a list of children elements wihtout adding extra nodes to the DOM. When we want to return a JSX we have to enclose it into single element and we enclose them via '<div>' tag, which adds an extra node to react DOM tree. To avoid this use React.Fragment tag. Code Example 1 is below:
+    <React.Fragment> 
+        <h1>Fragment Demo</h1>
+        <p>This describes Fragment Demo Component</p>
+    </React.Fragment>
+
+But this <></> empty tag also doing same job. See file FragmentDemo.js for this example.
+
+Example 2 Table:
+We created a Table and columnn data get exported from column.js component. Column component must use React.Fragment to return single JSX. But empty tag also works as I said earlier. See Code file Table.js for this demonstration.
+
+<b>Key attribute:</b> Fragment can also accept key attribute. It is needed if we are rendrering list of items. See Code file Table.js. Shorthand of Fragment is empty tag '<></>' but there is one limitation of this shorthand is that it cannot accept key attribute.
+    <React.Fragment>
+        {
+            item.map( x =>{
+                <React.Fragment key={x.id}>
+                    <h1> x.id</h1>
+                    <h1> x.title</h1>
+                </React.Fragment>
+            })
+        }
+    </React.Fragment>
+
+
+# Pure Components - For Class based Components
+<a href="https://youtu.be/YCRuTT31qR0?si=fbdVXNbJVQZaXvqt" target="_blank">Video Explanation</a></br>
+
+Let's first implement, see files ParentComp.js, RegularComp.js and PureComp.js.
+
+<img src="Images/26 - Pure Component.png" width="900" height="500"></br>
+Now we can see that Pure Component is not re-rendering. It is because Pure Component implemeted it's own "compShouldUpdate" method with shallow 'props and state comparison'. While Regular component did not implement this method and always return true.
+
+<b>Shallow Comparison</b>
+<img src="Images/26 - Shallow Comparison.png" width="900" height="500">
+
+Primitive Types (Non refernced values) : Value and types both compared. 
+Complex Types (Refernced values): returns true if both points to same object.
+
+<img src="Images/26 - When Pure Component rerender.png" width="900" height="500">
+<b>When Pure Component Re-render</b>
+So Pure Component compares 'prevState and currState' or 'prevProps and currProps' if they are different Pure Component gets re-rendered otherwise will not re-render. 
+Also if parents not re-render due to Pure Component then it's children will also not re-render although they are Regular Component.
+
+** We can get Performance boost by "making Component Pure Component if we don't need re-rendering". **
+** Key Point: You should not mutate(add) 'object or arrays' in 'props or state', if you are adding new items in that object or array, because refernce is not changing for props or states to that object or arrays (although new items gets added) so it's not get re-renderd.
+Always return new object or array when dealing with Pure Component. **
+
+<img src="Images/26 - Pure Component - Summary.png" width="900" height="500">
+
+** It is ok to use reuglar component, unless we see Performance issue **
+
+
+# Memo - For Functional Components
+<a href="https://youtu.be/7TaBhrnPH78?si=cWmAbzcj5HR2bnFt" target="_blank">Video Explanation</a></br>
+
+To make functional component a pure component just expert them as "export default React.Memo(FunctionalComp)".
+See file ParentComp.js and MemoComp.js for this.
+
+
+# Refs
+<a href="https://youtu.be/FXa9mMTKOu8?si=9lMAm6RjlqXHviyx" target="_blank">Video Explanation</a></br>
+Refs cannot to be attached with functional component.
+Refs makes possible to directly access the DOM node within the react. Lets do a small task access the input field and focus it for typing. See RefsDemo.js file.
+
+1st way (Refs): In class component constructor call 'createRef()' and assign it to any variable. Then attach it to your desired tag via 'ref={}'. Now you can handle this tag within react via your 'this.variable = createRef()'
+
+2nd way (older approach) callback Refs: create a property(variabel) in constructor and assign null. Now create a method to set this and assign the parameter element to it. Now when you need to use it just check that it is not null and access it via this.cbRef.focus(); 
+
+# Refs with Class Component
+<a href="https://youtu.be/8aCXVC9Qmto?si=T14eUf2NvTII9Efu" target="_blank">Video Explanation</a></br>
+In # Refs , we attach refs to a normal HTML tags. It is also possible to add a ref to Class Component. See FocusInput.js -> Input.js files
+
+Here we are creating a ref in parent which links to child component, so that we can access child method. 
+If we need to access parent ref component in child that's also possible let's move forward.
+
+# Refs Forwarding
+<a href="https://youtu.be/RLWniwmfdq4?si=2Go1gUKcYJv2vELN" target="_blank">Video Explanation</a></br>
+Ref forwarding is a technique to automatically forwarding ref through a component to one of it's children.
+Way:  
+Child component is a functional component and changed to arrow function and passed as a parameter to react.forwardRef() and that method is assigned to const via any functional component name.
+A parent component creates a ref and attach it to child component. now functional component give access to it's native code not itself.
+The child component is taking second parameter as ref and assign it to desirect element tag.
+
+see code files FRParentInput.js and FRInput.js
+
+** Explaination: For anyone who is confused between the previous video and this, let me break it down for you.
+'ref 'in React  is basically used to access HTML nodes, in the previous we learned that refs can also be used to access components in React, in a similar way we did the HTML element. 
+In this video we referenced the Child Component as well, but then we used React.forwardRef() to forward the reference from the child component to the input element inside the component.
+Thus we were directly able to access the focus() method of <input> tag directly in our Parent Component via this.inputRef.current.focus(). if we would'nt have forwarded the ref  we could'nt have accessed it directly via  the current object.
+**
+
+** Note: Rarely used Forward Ref **
+
+
 
 
 
