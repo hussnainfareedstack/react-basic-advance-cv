@@ -234,7 +234,8 @@ Example 2 Table:
 We created a Table and columnn data get exported from column.js component. Column component must use React.Fragment to return single JSX. But empty tag also works as I said earlier. See Code file Table.js for this demonstration.
 
 <b>Key attribute:</b> Fragment can also accept key attribute. It is needed if we are rendrering list of items. See Code file Table.js. Shorthand of Fragment is empty tag '<></>' but there is one limitation of this shorthand is that it cannot accept key attribute.
-    <React.Fragment>
+<code> 
+   <React.Fragment>
         {
             item.map( x =>{
                 <React.Fragment key={x.id}>
@@ -244,7 +245,7 @@ We created a Table and columnn data get exported from column.js component. Colum
             })
         }
     </React.Fragment>
-
+</code>
 
 # Pure Components - For Class based Components
 <a href="https://youtu.be/YCRuTT31qR0?si=fbdVXNbJVQZaXvqt" target="_blank">Video Explanation</a></br>
