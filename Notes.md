@@ -234,18 +234,18 @@ Example 2 Table:
 We created a Table and columnn data get exported from column.js component. Column component must use React.Fragment to return single JSX. But empty tag also works as I said earlier. See Code file Table.js for this demonstration.
 
 <b>Key attribute:</b> Fragment can also accept key attribute. It is needed if we are rendrering list of items. See Code file Table.js. Shorthand of Fragment is empty tag '<></>' but there is one limitation of this shorthand is that it cannot accept key attribute.
-<code> 
-   <React.Fragment>
-        {
-            item.map( x =>{
-                <React.Fragment key={x.id}>
-                    <h1> x.id</h1>
-                    <h1> x.title</h1>
-                </React.Fragment>
-            })
-        }
-    </React.Fragment>
-</code>
+    <code> {
+        <React.Fragment>
+            {
+                item.map( x =>{
+                    <React.Fragment key={x.id}>
+                        <h1> x.id</h1>
+                        <h1> x.title</h1>
+                    </React.Fragment>
+                })
+            }
+        </React.Fragment> 
+    }</code>
 
 # Pure Components - For Class based Components
 <a href="https://youtu.be/YCRuTT31qR0?si=fbdVXNbJVQZaXvqt" target="_blank">Video Explanation</a></br>
@@ -278,16 +278,16 @@ Always return new object or array when dealing with Pure Component. **
 # Memo - For Functional Components
 <a href="https://youtu.be/7TaBhrnPH78?si=cWmAbzcj5HR2bnFt" target="_blank">Video Explanation</a></br>
 
-To make functional component a pure component just expert them as "export default React.Memo(FunctionalComp)".
+To make functional component a pure component just export them as "export default React.Memo(FunctionalComp)".
 See file ParentComp.js and MemoComp.js for this.
 
 
 # Refs
 <a href="https://youtu.be/FXa9mMTKOu8?si=9lMAm6RjlqXHviyx" target="_blank">Video Explanation</a></br>
-Refs cannot to be attached with functional component.
+Refs cannot be attached with functional component.
 Refs makes possible to directly access the DOM node within the react. Lets do a small task access the input field and focus it for typing. See RefsDemo.js file.
-
-1st way (Refs): In class component constructor call 'createRef()' and assign it to any variable. Then attach it to your desired tag via 'ref={}'. Now you can handle this tag within react via your 'this.variable = createRef()'
+## How to create: 
+1st way (Refs): In class component constructor call 'createRef()' and assign it to any variable(Property). Then attach it to your desired tag via 'ref={this.Variable}'. Now you can handle this tag within react via your 'this.variable = createRef()'
 
 2nd way (older approach) callback Refs: create a property(variabel) in constructor and assign null. Now create a method to set this and assign the parameter element to it. Now when you need to use it just check that it is not null and access it via this.cbRef.focus(); 
 
@@ -301,13 +301,13 @@ If we need to access parent ref component in child that's also possible let's mo
 # Refs Forwarding
 <a href="https://youtu.be/RLWniwmfdq4?si=2Go1gUKcYJv2vELN" target="_blank">Video Explanation</a></br>
 Ref forwarding is a technique to automatically forwarding ref through a component to one of it's children.
-Way:  
+## How to create:  
 Child component is a functional component and changed to arrow function and passed as a parameter to react.forwardRef() and that method is assigned to const via any functional component name.
 A parent component creates a ref and attach it to child component. now functional component give access to it's native code not itself.
 The child component is taking second parameter as ref and assign it to desirect element tag.
 
 see code files FRParentInput.js and FRInput.js
-
+## Explaination
 ** Explaination: For anyone who is confused between the previous video and this, let me break it down for you.
 'ref 'in React  is basically used to access HTML nodes, in the previous we learned that refs can also be used to access components in React, in a similar way we did the HTML element. 
 In this video we referenced the Child Component as well, but then we used React.forwardRef() to forward the reference from the child component to the input element inside the component.
@@ -315,6 +315,156 @@ Thus we were directly able to access the focus() method of <input> tag directly 
 **
 
 ** Note: Rarely used Forward Ref **
+
+# Portals
+<a href="https://youtu.be/HpHLa-5Wdys?si=wyXDlBCeTCwEzhtQ" target="_blank">Video Explanation</a></br>
+
+React portals provide a way to render childrens into a DOM node that exists outside the DOM heirarchy of parent node. 
+Refer index.html, index.html, and PortalDemo.js
+
+In this way we can create a seperate portal like page and show within a main portal but this portal will not affected by current page css or parent css, and that's the advantage.
+
+Some use cases: Event bubling(from different portal/page), Don't want to affect parent CSS or some modal/pop-up/tooltip.
+
+
+# Error Boundary - Error Handling Phase Methods
+<a href="https://youtu.be/DNYXgtZBRPE?si=Iw4GYftjFyaKQm-j" target="_blank">Video Explanation</a></br>
+<img src="Images/32 - Error Boundry.png" width="900" height="500">
+
+A class component that implements either one or both of the lifecycle methods 'getDerivedStateFromError' or 'componentDidCatch' becomes and Error Boundry.
+
+The static method 'getDerivedStateFromError' is used to render a fallback UI after an error is thrown and 'componentDidCatch' method is used to log the error information.
+
+See files Hero.js and ErrorBoundry.js for this.
+
+if you have a regular onClick method/handler then you should use try catch method rather than using Error Boundries.
+
+## Summery
+<img src="Images/32 - Error Boundry Summery.png" width="900" height="500">
+
+
+# Higher Order Components (Part 1 - Why there is need of this?)
+<a href="https://youtu.be/B6aNv8nkUSw?si=6cJbR-KOS9GPC4Cj" target="_blank">Video Explanation</a></br>
+
+To share common functionality between components.
+See files ClickCounter.js, HoverCounter.js
+
+Here in code we can see clearly that user requirements changes slighly and our code is getting redundant(Repeating increamentCounter)
+For that if we make a common parent solves this case but not valid for every case like if counter is randomly spread of parents. So HOC done the job more efficiently.
+
+<img src="Images/33 - Why Higher Order Component- make come parent.png" width="900" height="500">
+<img src="Images/33 - Why Higher Order Component - BUt what if counter spread over parents.png" width="900" height="500">
+
+
+
+# Higher Order Components (Part 2 - What exactly is this and how to create)
+<a href="https://youtu.be/rsBQj6X7UK8?si=sj9cL5GcSjdfoPU7" target="_blank">Video Explanation</a></br>
+<img src="Images/34 - HOC.png" width="900" height="500">
+
+Higher Order component takes a component as parameter adds some functionality and then return them.
+See files ClickCounter.js, HoverCounter.js and withCounter.js .
+
+
+# Higher Order Components (Part 3 - Props passing way)
+<a href="https://youtu.be/l8V59zIdBXU?si=47T5inm8ODQFwqj_" target="_blank">Video Explanation</a></br>
+
+Props passed to component are not accesible if that component is within a HOC and passed props moved down to HOC, so we have to use spread operator to pass the remaining props to component from HOC.
+
+Parameters are passed to HOC in export default withcounter(Component, parameter).
+
+See files App.js, ClickCounter.js, HoverCounter.js and withCounter.js .
+
+You will HOC in react libararies like 'connect HOC in Redux with router in react router with styles in material UI'
+
+
+# Render Props (Part 1)
+<a href="https://youtu.be/NdapMDgNhtE?si=5SNL_F00847rRfCT" target="_blank">Video Explanation</a></br>
+<img src="Images/36 - Render Props.png" width="900" height="500">
+Why There is a need of Render Props: Same issue which solves HOC(share common functionalities/code)
+See Files ClickCounterTwo.js, HoverCounterTwo.js
+
+# Render Props (Part 2)
+<a href="https://youtu.be/EZil2OTyB4w?si=kKeO8Qqm3sZp9MWH" target="_blank">Video Explanation</a></br>
+
+What Render Prop Pattern is and how to implement it: 
+* We create a component for common code like here it is CounterRenderProps.js
+* CounterRenderProps.js return in it's render mehtod a call to its props method 'render' and gave them states and methods through parameters.
+* Now using common code component share the necessary code 'via props to another component which wants', via arrow func.
+    "<CounterRenderProps render={ (param1, parm2) => (<ClickCounterTwo p1={param1} p2 = {parm2}></ClickCounterTwo>) }> "
+* common code component(CounterRenderProps.js) can also pass props via children, this.props.children
+
+See Files ClickCounterTwo.js, HoverCounterTwo.js, User.js, CounterRenderProps.js
+
+# Context (Part 1)
+<a href="https://youtu.be/j3j8St50fNY?si=3dazo5_gGogKQGML" target="_blank">Video Explanation</a></br>
+What was the need for context API?
+<img src="Images/38 - Context.png" width="900" height="500">
+
+As you can see in the picture that components are nested and we have to pass username to every component even it is useable for last one, imagine if 10 or 20 level deep nested components! Then this will make a issue. Like if some props have lang requirement, UI Theme, authentication.
+What if we directly send data to required component without having manual drill down the props. This is where context comes into picture.
+## Context Definition
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+# Context (Part 2)
+<a href="https://youtu.be/lTjQjWemKgE?si=D6vIXItqRkgLqjcA" target="_blank">Video Explanation</a></br>
+
+## Context Creation Steps:
+1. Create the context:
+Create userContext file. Now create context as const UserContext = React.createContext(). Now it comes with a Provider and consumer React component. export the provider and consumer. Now provide the Provider, and the place you provide is important because only decendant components can consume it. App Component is a good place because almost all component fall in this.
+
+2. Provide a context value:
+Enclose your component in UserProvider and add your values as 'value' attribute to UserProvider.
+
+3. Consume the context value:
+Now where you want to use the consumer, in render method enclose everything within UserConsumer and and write arrow function with your desired parameter name and return JSX from here now.
+
+# Context (Part 3)
+<a href="https://youtu.be/A9WlkhdLnn0?si=2vOFoOVhHLZofMMD" target="_blank">Video Explanation</a></br> 
+
+## 1. Default Values:
+You can also add default values, if you didn't used UserProvider anywhere and added default values as parameter at the time of context creation in createContext("Default") then this value will be used.
+
+## 2. Context type:
+You can also consume value in another way, but for this export whole context like 'export default UserContext' and in which component you want to use write after the class 'componentE.contexttype = UserContext'. Now value is accessible as this.context
+
+If your application support public class field syntax then your can replace 'componentE.contexttype = UserContext' with 'static contextType = UserContext'. But this will be in the class.
+
+This context looks easier to write well there are some limitation of this.
+
+## Limitation of context type
+1. Only works with class component
+2. You can only subscribe to only single context, many times we need more than one context 
+
+## Consume Multiple Contexts
+<img src="Images/38 - Context.png" width="900" height="500">
+
+
+# HTTP and React
+<a href="https://youtu.be/GTmjthNvrxY?si=VkHOPhL1-LaMNK72" target="_blank">Video Explanation</a></br> 
+<img src="Images/41 - React HTTP.png" width="900" height="500">
+
+Create a react app via 'npx create-react-app react-http'
+and install axios via 'npm install axios'
+
+
+# HTTP GET Request (using axios)
+<a href="https://youtu.be/NEYrSUM4Umw?si=hB5t0uaG4yQjAATx" target="_blank">Video Explanation</a></br> 
+
+Make http request in componentDidMount() method. It runs only once after the UI rendered. 
+So that when UI rendered completely, it makes request, fetch data and then re-rednered(using state) the data again.
+refers to 'PostList.js' in 'react-http' app.
+
+
+# HTTP Post Request
+<a href="https://youtu.be/x9UEDRbLhJE?si=GvLqECtiCtagVrCl" target="_blank">Video Explanation</a></br> 
+
+To make Post request simply pass the 2nd parameter in axios as data object and receives the response in 'then'.
+For form validation you can use a libaray 'Fromic' which help you with form in react. Also if you are using 'Redux' you might take look at 'Redux Axios Middleware'
+* Put or delete request also same like these POST and GET, experiement by yourself these.
+
+
+
+
 
 
 
