@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserContext = React.createContext("Codevolution");
+const UserContext = React.createContext("Codevolution"); // here "Codevolution" is a default value
 
 const UserProvider = UserContext.Provider;
 const UserConsumer = UserContext.Consumer

@@ -38,9 +38,9 @@ function App() {
   return (
     <div className="App">
 
-    <UserProvider value={"Hussnain"}>
+    {/* <UserProvider value={"Hussnain"}>
       <ComponentC/>
-    </UserProvider>
+    </UserProvider> */}
 
 
 

@@ -410,13 +410,13 @@ Context provides a way to pass data through the component tree without having to
 
 ## Context Creation Steps:
 1. Create the context:
-Create userContext file. Now create context as const UserContext = React.createContext(). Now it comes with a Provider and consumer React component. export the provider and consumer. Now provide the Provider, and the place you provide is important because only decendant components can consume it. App Component is a good place because almost all component fall in this.
+Create 'userContext' file. Now create context as const UserContext = React.createContext(). Now it comes with a Provider and consumer React component. export the provider and consumer. Now provide the Provider, and the place you provide is important because only decendant components can consume it. App Component is a good place because almost all component fall in this.
 
 2. Provide a context value:
 Enclose your component in UserProvider and add your values as 'value' attribute to UserProvider.
 
 3. Consume the context value:
-Now where you want to use the consumer, in render method enclose everything within UserConsumer and and write arrow function with your desired parameter name and return JSX from here now.
+Now where you want to use the consumer, in render method enclose everything within UserConsumer and write arrow function with your desired parameter name and return JSX from here now.
 
 # Context (Part 3)
 <a href="https://youtu.be/A9WlkhdLnn0?si=2vOFoOVhHLZofMMD" target="_blank">Video Explanation</a></br> 
@@ -430,47 +430,11 @@ You can also consume value in another way, but for this export whole context lik
 If your application support public class field syntax then your can replace 'componentE.contexttype = UserContext' with 'static contextType = UserContext'. But this will be in the class.
 
 This context looks easier to write well there are some limitation of this.
-
-## Limitation of context type
+### Limitation of context type
 1. Only works with class component
 2. You can only subscribe to only single context, many times we need more than one context 
 
 ## Consume Multiple Contexts
 <img src="Images/38 - Context.png" width="900" height="500">
-
-
-# HTTP and React
-<a href="https://youtu.be/GTmjthNvrxY?si=VkHOPhL1-LaMNK72" target="_blank">Video Explanation</a></br> 
-<img src="Images/41 - React HTTP.png" width="900" height="500">
-
-Create a react app via 'npx create-react-app react-http'
-and install axios via 'npm install axios'
-
-
-# HTTP GET Request (using axios)
-<a href="https://youtu.be/NEYrSUM4Umw?si=hB5t0uaG4yQjAATx" target="_blank">Video Explanation</a></br> 
-
-Make http request in componentDidMount() method. It runs only once after the UI rendered. 
-So that when UI rendered completely, it makes request, fetch data and then re-rednered(using state) the data again.
-refers to 'PostList.js' in 'react-http' app.
-
-
-# HTTP Post Request
-<a href="https://youtu.be/x9UEDRbLhJE?si=GvLqECtiCtagVrCl" target="_blank">Video Explanation</a></br> 
-
-To make Post request simply pass the 2nd parameter in axios as data object and receives the response in 'then'.
-For form validation you can use a libaray 'Fromic' which help you with form in react. Also if you are using 'Redux' you might take look at 'Redux Axios Middleware'
-* Put or delete request also same like these POST and GET, experiement by yourself these.
-
-
-
-
-
-
-
-
-
-
-
 
 
